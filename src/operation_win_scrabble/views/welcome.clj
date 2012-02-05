@@ -50,8 +50,11 @@
    "AS" "ASEA" "EAR" "EARS" "ER" "ERA" "ERAS" "ERS" "ES" "RAS"
    "RASE" "RE" "RES" "SAE" "SEA" "SEAR" "SER" "SERA"])
 
+(def jquery-lib-url  "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js")
+
 (defn render-game-page [rack-letters answers group-size]
   (html5
+    (include-js jquery-lib-url)
     (include-js "/js/main.js")
     (include-css "/css/main.css")
     [:div#guess
