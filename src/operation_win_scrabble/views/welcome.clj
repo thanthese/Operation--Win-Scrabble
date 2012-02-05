@@ -2,7 +2,8 @@
   (:require [operation-win-scrabble.views.common :as common])
   (:require [operation-win-scrabble.services.anagram :as ag])
   (:use [noir.core :only [defpage]]
-        [hiccup.core :only [html]]))
+        [hiccup.core]
+        [hiccup.page-helpers]))
 
 ;; settings
 
@@ -44,6 +45,30 @@
 
 ;; pages
 
+(def test-words
+  ["AA" "AAS" "AE" "AR" "ARE" "AREA" "AREAS" "ARES" "ARS" "ARSE"
+   "AS" "ASEA" "EAR" "EARS" "ER" "ERA" "ERAS" "ERS" "ES" "RAS"
+   "RASE" "RE" "RES" "SAE" "SEA" "SEAR" "SER" "SERA"])
+
+(defn render-game-page [rack-letters answers group-size]
+  (html5
+    (include-js "/js/main.js")
+    (include-css "/css/main.css")
+    [:div#guess
+     (for [_ rack-letters]
+       [:div.guess-letter])]
+    [:div#rack
+     (for [letter rack-letters]
+       [:div.rack-letter letter])]
+    [:div#answers
+     (for [column (group group-size answers)]
+       [:div.column
+        (for [word column]
+          [:div.word {:word word}
+           (for [letter word]
+             [:div.letter-box
+              [:div.letter letter]])])])]))
+
 (defpage "/" []
          (common/layout
            [:p "There's nothing on the homepage yet."]
@@ -55,5 +80,6 @@
            (for [w (next-words)]
              [:p w])))
 
-(group group-size (next-words))
-
+(defpage
+  "/testgame" []
+  (render-game-page "AAERS" test-words 10))
