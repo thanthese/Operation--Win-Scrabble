@@ -55,6 +55,10 @@ div.word {
   clear: both;
 }
 
+div.word[state="not-gotten"] div.letter {
+  display: none;
+}
+
 div.letter-box {
   background-color: yellow;
   padding: 3px;
@@ -63,8 +67,4 @@ div.letter-box {
   border-radius: 2px;
   width: 1em;
   height: 1em;
-}
-
-div.letter {
-  display: none;
 }

@@ -16,6 +16,9 @@
 (def group-size "Number of words in each column on webpage."
   10)
 
+(def jquery-lib-url "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js")
+
+
 ;; consts
 
 (def all-words (ag/grab-words ag/dict))
@@ -50,12 +53,11 @@
    "AS" "ASEA" "EAR" "EARS" "ER" "ERA" "ERAS" "ERS" "ES" "RAS"
    "RASE" "RE" "RES" "SAE" "SEA" "SEAR" "SER" "SERA"])
 
-(def jquery-lib-url  "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js")
-
-(defn render-game-page [rack-letters answers group-size]
+(defn render-game-page [rack-letters answers group-size is-test]
   (html5
     (include-js jquery-lib-url)
     (include-js "/js/main.js")
+    (when is-test (include-js "/js/test-main.js"))
     (include-css "/css/main.css")
     [:div#guess
      (for [_ rack-letters]
@@ -67,7 +69,8 @@
      (for [column (group group-size answers)]
        [:div.column
         (for [word column]
-          [:div.word {:word word}
+          [:div.word {:word word
+                      :state "not-gotten"}
            (for [letter word]
              [:div.letter-box
               [:div.letter letter]])])])]))
@@ -84,5 +87,5 @@
              [:p w])))
 
 (defpage
-  "/testgame" []
-  (render-game-page "AAERS" test-words 10))
+  "/test" []
+  (render-game-page "AAERS" test-words 10 true))
