@@ -31,7 +31,32 @@ $(document).keypress(function(key) {
 /** handlers **/
 
 function handleLetter(letter) {
-  //console.log(letter)
+  if(!rackContains(letter)) return
+
+  removeFirstFromRack(letter)
+  addToGuess(letter)
+}
+
+// remove first occurrence of letter from rack
+function removeFirstFromRack(letter) {
+  ls = $('div.rack-letter')
+  for(var i = 0; i < ls.length; ++i) {
+    if(ls[i].innerHTML == letter) {
+      ls[i].innerHTML = ""
+      return
+    }
+  }
+}
+
+// add letter to first open space on guess
+function addToGuess(letter) {
+  ls = $('div.guess-letter')
+  for(var i = 0; i < ls.length; ++i) {
+    if(ls[i].innerHTML == "") {
+      ls[i].innerHTML = letter
+      return
+    }
+  }
 }
 
 function handleEnter() {

@@ -62,6 +62,60 @@ function runTests() {
       lettersInRack(),
       ['A', 'A', 'E', 'R'])
 
+  // 'a' event
+  handleLetter('A')
+  isEqualArrays("letters in guess after 'A'",
+      lettersInGuess(),
+      ['S', 'A'])
+  isEqualArrays("letters in rack after 'A'",
+      lettersInRack(),
+      ['A', 'E', 'R'])
+
+  // 2nd 'a' event
+  handleLetter('A')
+  isEqualArrays("letters in guess after second 'A'",
+      lettersInGuess(),
+      ['S', 'A', 'A'])
+  isEqualArrays("letters in rack after second 'A'",
+      lettersInRack(),
+      ['E', 'R'])
+
+  // 3rd 'a' event
+  handleLetter('A')
+  isEqualArrays("letters in guess after third 'A'",
+      lettersInGuess(),
+      ['S', 'A', 'A'])
+  isEqualArrays("letters in rack after third 'A'",
+      lettersInRack(),
+      ['E', 'R'])
+
+  // 'r' event
+  handleLetter('R')
+  isEqualArrays("letters in guess after 'R'",
+      lettersInGuess(),
+      ['S', 'A', 'A', 'R'])
+  isEqualArrays("letters in rack after 'R'",
+      lettersInRack(),
+      ['E'])
+
+  // 'e' event
+  handleLetter('E')
+  isEqualArrays("letters in guess after 'E'",
+      lettersInGuess(),
+      ['S', 'A', 'A', 'R', 'E'])
+  isEqualArrays("letters in rack after 'E'",
+      lettersInRack(),
+      [])
+
+  // random letter ('y') event
+  handleLetter('Y')
+  isEqualArrays("letters in guess after 'Y'",
+      lettersInGuess(),
+      ['S', 'A', 'A', 'R', 'E'])
+  isEqualArrays("letters in rack after 'Y'",
+      lettersInRack(),
+      [])
+
 
 
 
